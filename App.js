@@ -7,9 +7,13 @@ import PokeList from './components/PokeList';
 import PokemonDetail from './components/PokemonDetail';
 
 export default function App() {
+  const Stack = createStackNavigator();
   return (
-    <View>
-      <PokeList />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="PokeList" component={PokeList} />
+        <Stack.Screen name="PokeDetail" component={PokemonDetail} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

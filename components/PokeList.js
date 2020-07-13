@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View, ScrollView, FlatList, Button } from 'react-native';
-import Pokemons from './Pokemons'
+import { getPokemons } from './Pokemons'
 import Pokemon from './Pokemon'
 
 const PokeList = ({ navigation }) => {
@@ -8,13 +8,15 @@ const PokeList = ({ navigation }) => {
   return (
     <View>
       {/* Insertar boton */}
-      <Button title="Load Pokemons" onPress={() => setPokemons(Pokemons)} />
+      <Button title="Load Pokemons" onPress={() => setPokemons(getPokemons())} />
 
       {/* Lista de Pokemon */}
       <FlatList
         data={pokemons.results}
         renderItem={({ item }) => (
-          <Pokemon name={item.name} />
+          <View onTouchEnd={() => navigation.navigate('PokeDetail', { name: item.name, detail: item.url })} >
+            <Pokemon name={item.name} />
+          </View>
         )}
         keyExtractor={item => item.name}
       />
